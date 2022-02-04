@@ -1,0 +1,28 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using TMPro;
+
+public class ResourceCounter : MonoBehaviour
+{
+    [SerializeField] private int _resources;
+    [SerializeField] private TMP_Text _resourceText;
+
+    private static ResourceCounter _instance;
+
+    public static ResourceCounter Instance { get { return _instance; } }
+
+    private void Awake() 
+    {
+        if (_instance != null && _instance != this)
+            Destroy(this.gameObject);
+        else
+            _instance = this;
+    }
+
+    public void ReceiveResources(int resourceCount)
+    {
+        _resources += resourceCount;
+        _resourceText.text = _resources.ToString();
+    }
+}
